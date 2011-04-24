@@ -5,3 +5,5 @@
  * Sets the default route to "todos"
  */
 $config['_default'] = 'todos';
+
+$config['api/todos'] = 'todos_api';
