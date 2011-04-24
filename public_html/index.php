@@ -1,4 +1,10 @@
 <?php
+ini_set('xdebug.collect_vars', 'on');
+ini_set('xdebug.collect_params', '4');
+ini_set('xdebug.dump_globals', 'on');
+ini_set('xdebug.dump.SERVER', 'REQUEST_URI');
+ini_set('xdebug.show_local_vars', 'on');
+
 /**
  * This file acts as the "front controller" to your application. You can
  * configure your application, modules, and system directories here.
@@ -22,7 +28,7 @@ define('IN_PRODUCTION', FALSE);
  *
  * This path can be absolute or relative to this file.
  */
-$kohana_application = 'application';
+$kohana_application = '../application';
 
 /**
  * Kohana modules directory. This directory should contain all the modules used
@@ -31,7 +37,7 @@ $kohana_application = 'application';
  *
  * This path can be absolute or relative to this file.
  */
-$kohana_modules = 'modules';
+$kohana_modules = '../modules';
 
 /**
  * Kohana system directory. This directory should contain the core/ directory,
@@ -39,7 +45,7 @@ $kohana_modules = 'modules';
  *
  * This path can be absolute or relative to this file.
  */
-$kohana_system = 'system';
+$kohana_system = '../system';
 
 /**
  * Test to make sure that Kohana is running on PHP 5.2 or newer. Once you are
@@ -74,18 +80,21 @@ define('EXT', '.php');
 // $Id: index.php 3915 2009-01-20 20:52:20Z zombor $
 //
 
-$kohana_pathinfo = pathinfo(__FILE__);
+//$kohana_pathinfo = pathinfo(__FILE__);
 // Define the front controller name and docroot
-define('DOCROOT', $kohana_pathinfo['dirname'].DIRECTORY_SEPARATOR);
-define('KOHANA',  $kohana_pathinfo['basename']);
+// define('DOCROOT', $kohana_pathinfo['dirname'].DIRECTORY_SEPARATOR);
+// define('KOHANA',  $kohana_pathinfo['basename']);
+
+define('DOCROOT', getcwd().DIRECTORY_SEPARATOR);
+define('KOHANA',  basename(__FILE__));
 
 // If the front controller is a symlink, change to the real docroot
 is_link(KOHANA) and chdir(dirname(realpath(__FILE__)));
 
 // If kohana folders are relative paths, make them absolute.
-$kohana_application = file_exists($kohana_application) ? $kohana_application : DOCROOT.$kohana_application;
-$kohana_modules = file_exists($kohana_modules) ? $kohana_modules : DOCROOT.$kohana_modules;
-$kohana_system = file_exists($kohana_system) ? $kohana_system : DOCROOT.$kohana_system;
+//$kohana_application = file_exists($kohana_application) ? $kohana_application : DOCROOT.$kohana_application;
+//$kohana_modules = file_exists($kohana_modules) ? $kohana_modules : DOCROOT.$kohana_modules;
+//$kohana_system = file_exists($kohana_system) ? $kohana_system : DOCROOT.$kohana_system;
 
 // Define application and system paths
 define('APPPATH', str_replace('\\', '/', realpath($kohana_application)).'/');
@@ -97,11 +106,11 @@ unset($kohana_application, $kohana_modules, $kohana_system);
 
 if (file_exists(DOCROOT.'install'.EXT))
 {
-	// Load the installation tests
-	include DOCROOT.'install'.EXT;
+  // Load the installation tests
+  include DOCROOT.'install'.EXT;
 }
 else
 {
-	// Initialize Kohana
-	require SYSPATH.'core/Bootstrap'.EXT;
+  // Initialize Kohana
+  require SYSPATH.'core/Bootstrap'.EXT;
 }
