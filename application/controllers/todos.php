@@ -5,9 +5,17 @@ class Todos_Controller extends Controller {
   public function __construct() {
     parent::__construct();
     $this->session = Session::instance();
+
+    $auth = new Auth();
+    if (!$auth->logged_in()){
+      $this->session->set("requested_url","/".url::current()); // this will redirect from the login page back to this page
+      url::redirect('/users/login');
+    }else{
+      $this->user = $auth->get_user(); //now you have access to user information stored in the database
+    }
   }
 
-  public function index($_id = false) {
+  public function index($id = false) {
     $view = new View('todos/index');
 
     $view->header = new View('layout/header');
@@ -18,7 +26,20 @@ class Todos_Controller extends Controller {
 
     $view->header->pageTitle = "Your ToDos";
 
-    $view->message = $this->session->get('message') ? $this->session->get_once('message') : false;
+    $view->messageType  = $this->session->get('message_type') ? $this->session->get_once('message_type') : false;
+    $view->message      = $this->session->get('message') ? $this->session->get_once('message') : false;
+
+    $view->todoForm->errors = null;
+
+    // setup and initialize your form field names
+    $form = array(
+      'description' => '',
+      'due_date'    => '',
+      'id'          => '',
+    );
+
+    //  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
+    $errors = $form;
 
     if( $_POST ) {
       $post = new Validation($_POST);
@@ -28,49 +49,55 @@ class Todos_Controller extends Controller {
       $post->add_rules('due_date', 'required');
 
       if( $post->validate() ) {
+        // Attempt to save the todo item. If an id has been passed thru, we're editing
+        // an existing item, otherwise we create a new item
         $saveStatus = $this->input->post('id') ? $this->_save($this->input->post('id')) : $this->_save();
 
         if( $saveStatus ) {
-          $message = "ToDo item saved.";
+          $view->message_type = "good";
+          $view->message      = "ToDo item saved.";
 
           $view->todoForm->description  = "";
           $view->todoForm->due_date     = "";
           $view->todoForm->id           = "";
         } else {
-          $message = "[ERROR] Save failed. Please try again.";
+          $view->message_type = "error";
+          $view->message      = "Save failed. Please try again.";
         }
       } else {
-        if( $this->input->post('id') ) {
-          $view->todoForm->id = $this->input->post('id');
-        }
-
+        // repopulate the form fields
         $view->todoForm->description  = $this->input->post('description');
         $view->todoForm->due_date     = $this->input->post('due_date');
+        $view->todoForm->id           = $this->input->post('id');
 
-        $message = "[ERROR] Please correct the errors below and try again.";
+        // populate the error fields, if any
+        $view->todoForm->errors = arr::overwrite($errors, $post->errors('form_errors'));
+        $view->message_type     = "error";
+        $view->message          = "Please correct the errors below and try again.";
       }
 
-    } else if($_id) {
-      $editTodo = new Todo_Model($_id);
+    } else if( $id ) {
+      // Attempt to load the requested todo item
+      $editTodo = new Todo_Model($id);
 
       if ( $editTodo->loaded ) {
-        $view->todoForm->id           = $_id;
+        $view->todoForm->id           = $editTodo->id;
         $view->todoForm->description  = $editTodo->description;
         $view->todoForm->due_date     = $editTodo->due_date;
       } else {
-        $view->message = '[ERROR] ToDo item not found.';
+        $view->message_type = "error";
+        $view->message      = 'ToDo item not found.';
       }
 
     }
 
     $view->todoList->todos = ORM::factory('todo')->find_all();
-
     $view->render(TRUE);
   }
 
   public function delete($id) {
     ORM::factory('todo')->delete($id);
-    $this->session->set_flash('message', 'ToDo item deleted.');
+    $this->session->set_flash(array('message_type'=>'good', 'message'=>'ToDo item deleted.'));
     url::redirect('/');
   }
 
@@ -83,12 +110,12 @@ class Todos_Controller extends Controller {
 
         if ( $todo->saved ) {
           if ( $todo->complete ) {
-            $this->session->set_flash('message', 'ToDo item completed.');
+            $this->session->set_flash(array('message_type'=>'good', 'message'=>'ToDo item completed.'));
           } else {
-            $this->session->set_flash('message', 'ToDo item uncompleted.');
+            $this->session->set_flash(array('message_type'=>'good', 'message'=>'ToDo item uncompleted.'));
           }
         } else {
-          $this->session->set_flash('message', '[ERROR] ToDo item could not be saved.');
+          $this->session->set_flash(array('message_type'=>'error', 'message'=>'ToDo item could not be saved.'));
         }
       }
     }
@@ -111,4 +138,4 @@ class Todos_Controller extends Controller {
     $todo->save();
     return $todo->saved;
   }
-} // End Welcome Controller
+} // End Todos Controller
