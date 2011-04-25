@@ -178,6 +178,37 @@ body {
   width: 960px;
 }
 
+header {
+  padding: 30px 0;
+}
+
+header[role=banner] h1 {
+  font-family: 'Special Elite', serif;
+  font-size: 95px;
+  font-style: normal;
+  font-weight: 700;
+  float: left;
+  text-shadow: 1px 1px 1px #000;
+  text-decoration: none;
+  text-transform: lowercase;
+  letter-spacing: 0.127em;
+  word-spacing: 0.006em;
+  line-height: 1.2;
+}
+
+header[role=banner] nav {
+  float: right;
+}
+
+header[role=banner] p {
+  float: right;
+}
+
+header[role=banner] nav li {
+  float: left;
+  margin-left: 10px
+}
+
 .todolist-wrapper {
   border: 1px solid #242424;
   overflow: hidden;
@@ -189,6 +220,8 @@ body {
 
   -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 }
+
+/* @group todo list  */
 
 table.todo-list {
   width: 100%;
@@ -277,13 +310,37 @@ table.todo-list td:first-child a.Incomplete {
   background: url(/img/sprite.png) no-repeat 0 0;
 }
 
-table.todo-list td:first-child a.Incomplete:hover {
-  background: url(/img/sprite.png) no-repeat 0 -100px;
-}
-
 table.todo-list td:first-child a.Complete {
   background: url(/img/sprite.png) no-repeat 0 -50px;
 }
+
+table.todo-list td:first-child a:hover {
+  background: url(/img/sprite.png) no-repeat 0 -100px;
+}
+
+/* @end todo list */
+
+/* @group Todo form  */
+
+#todo-form {
+  padding: 30px 0;
+}
+
+#todo-form form {
+  width: 100%;
+}
+
+/* @end Todo form */
+
+
+/* @group Footer  */
+
+footer[role=contentinfo] {
+  padding: 30px 0;
+}
+
+/* @end Footer */
+
 
 /**
  * Non-semantic helper classes: please define your styles before this section.
