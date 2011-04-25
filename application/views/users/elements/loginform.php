@@ -10,7 +10,7 @@
       </div>
       <div class="input text">
         <label for="login_password">Password</label>
-        <input type="password" name="login_password" id="login_password" value="<?php echo isset($login_password) ? $login_password : ''; ?>" />
+        <input type="password" name="login_password" id="login_password" />
         <?php if( isset($errors['login_password']) ): ?><div class="error"><?php echo $errors['login_password']; ?></div><?php endif; ?>
       </div>
       <div class="input checkbox">

@@ -15,12 +15,12 @@
       </div>
       <div class="input text">
         <label for="register_password">Password</label>
-        <input type="password" name="register_password" id="register_password" value="<?php echo isset($register_password) ? $register_password : ''; ?>" />
+        <input type="password" name="register_password" id="register_password" />
         <?php if( isset($errors['register_password']) ): ?><div class="error"><?php echo $errors['register_password']; ?></div><?php endif; ?>
       </div>
       <div class="input text">
         <label for="register_confirm">Confirm Password</label>
-        <input type="password" name="register_confirm" id="register_confirm" value="<?php echo isset($register_confirm) ? $register_confirm : ''; ?>" />
+        <input type="password" name="register_confirm" id="register_confirm" />
         <?php if( isset($errors['register_confirm']) ): ?><div class="error"><?php echo $errors['register_confirm']; ?></div><?php endif; ?>
       </div>
       <div class="buttons submit">

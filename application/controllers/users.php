@@ -53,8 +53,8 @@ class Users_Controller extends Controller {
 
         if ( !$user->loaded ) {
 
-          $view->loginForm->username    = $username;
-          $view->loginForm->rememberme  = $remember;
+          $view->loginForm->login_username    = $username;
+          $view->loginForm->login_rememberme  = $remember;
 
           $view->message_type = "error";
           $view->message      = "Please correct the errors below and try again" ;
@@ -67,8 +67,8 @@ class Users_Controller extends Controller {
 
         }  else {
 
-          $view->loginForm->username    = $username;
-          $view->loginForm->rememberme  = $remember;
+          $view->loginForm->login_username    = $username;
+          $view->loginForm->login_rememberme  = $remember;
 
           $view->message_type = "error";
           $view->message      = "Please correct the errors below and try again" ;
@@ -78,8 +78,8 @@ class Users_Controller extends Controller {
 
       } else {
         // repopulate the form fields
-        $view->loginForm->username    = $this->input->post('login_username');
-        $view->loginForm->rememberme  = $this->input->post('login_rememberme');
+        $view->loginForm->login_username    = $this->input->post('login_username');
+        $view->loginForm->login_rememberme  = $this->input->post('login_rememberme');
 
         // populate the error fields, if any
         $view->loginForm->errors  = arr::overwrite($errors, $post->errors('form_errors'));
@@ -130,8 +130,6 @@ class Users_Controller extends Controller {
     $form = array(
       'register_username'   => '',
       'register_email'      => '',
-      'register_password'   => '',
-      'register_confirm'    => '',
     );
 
     //  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
@@ -154,49 +152,50 @@ class Users_Controller extends Controller {
         if ( $user->loaded ) {
 
           // The username is already taken
-          $view->registerform->username = $this->input->post('register_username');
-          $view->registerform->email    = $this->input->post('register_email');
+          $view->registerform->register_username = $this->input->post('register_username');
+          $view->registerform->register_email    = $this->input->post('register_email');
 
           $view->message_type = "error";
           $view->message      = "Please correct the errors below and try again" ;
           $post->add_error('register_username', 'already_taken');
 
         } else {
+          $user = ORM::factory('user');
 
           $username = $this->input->post('register_username');
           $email    = $this->input->post('register_email');
           $password = $this->input->post('register_password');
 
           $user->username = $username;
-          $user->email    = $email ;
+          $user->email    = $email;
           $user->password = $this->auth->hash_password($password);
 
-          if ($user->add(ORM::factory('role', 'login')) AND $user->save()) {
+          if( $user->add(ORM::factory('role', 'login')) AND $user->save() ) {
 
             $this->auth->login($username, $password);
             $this->session->set_flash(array('message_type'=>'good', 'message'=>'Welcome! Thanks for signing up :)'));
-            //url::redirect($this->session->get('requested_url'));
+            url::redirect($this->session->get('requested_url'));
 
           } else {
 
-            $view->registerform->username = $username;
-            $view->registerform->email    = $email ;
+            $view->registerform->register_username = $username;
+            $view->registerform->register_email    = $email ;
 
             $view->message_type = "error";
-            $view->message      = "Hmmm, something went wrong and we couldn't register you. Please try again." ;
+            $view->message      = "Hmmm, something went wrong and we couldn't register you. Please try again.";
 
           }
         }
 
       } else {
         // repopulate the form fields
-        $view->registerform->username    = $this->input->post('username');
-        $view->registerform->rememberme  = $this->input->post('rememberme');
+        $view->registerform->register_username    = $this->input->post('register_username');
+        $view->registerform->register_rememberme  = $this->input->post('rregister_ememberme');
 
         // populate the error fields, if any
-        $view->registerform->errors  = arr::overwrite($errors, $post->errors('form_errors'));
-        $view->message_type       = "error";
-        $view->message            = "Please correct the errors below and try again.";
+        $view->registerform->errors = arr::overwrite($errors, $post->errors('form_errors'));
+        $view->message_type         = "error";
+        $view->message              = "Please correct the errors below and try again.";
       }
 
       $view->registerform->errors = arr::overwrite($errors, $post->errors('form_errors'));
