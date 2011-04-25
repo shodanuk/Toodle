@@ -52,7 +52,7 @@ $config['internal_cache_encrypt'] = FALSE;
  *
  * The cache is deleted when/if the key changes.
  */
-$config['internal_cache_key'] = 'foobar-changeme';
+$config['internal_cache_key'] = 'r0niisahamst3r';
 
 /**
  * Enable or disable gzip output compression. This can dramatically decrease
@@ -116,7 +116,7 @@ $config['extension_prefix'] = 'MY_';
  */
 $config['modules'] = array
 (
-  // MODPATH.'auth',      // Authentication
+  MODPATH.'auth',      // Authentication
   // MODPATH.'kodoc',     // Self-generating documentation
   // MODPATH.'gmaps',     // Google Maps integration
   // MODPATH.'archive',   // Archive utility

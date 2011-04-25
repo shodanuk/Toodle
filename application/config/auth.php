@@ -26,7 +26,7 @@ $config['hash_method'] = 'sha1';
  * Defines the hash offsets to insert the salt at. The password hash length
  * will be increased by the total number of offsets.
  */
-$config['salt_pattern'] = '1, 3, 5, 9, 14, 15, 20, 21, 28, 30';
+$config['salt_pattern'] = '1, 2, 6, 7, 12, 17, 19, 20, 25, 29';
 
 /**
  * Set the auto-login (remember me) cookie lifetime, in seconds. The default
@@ -45,5 +45,5 @@ $config['session_key'] = 'auth_user';
  */
 $config['users'] = array
 (
-  // 'admin' => 'b3154acf3a344170077d11bdb5fff31532f679a1919e716a02',
+  //'shodan' => 'a638d009f988de090a80e80f00909b09809ef63687bad',
 );
