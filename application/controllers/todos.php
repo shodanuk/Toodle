@@ -26,8 +26,8 @@ class Todos_Controller extends Controller {
 
     $view->header->pageTitle = "Your ToDos";
 
-    $view->messageType  = $this->session->get('message_type') ? $this->session->get_once('message_type') : false;
-    $view->message      = $this->session->get('message') ? $this->session->get_once('message') : false;
+    $view->message_type  = $this->session->get('message_type') ? $this->session->get_once('message_type') : false;
+    $view->message       = $this->session->get('message') ? $this->session->get_once('message') : false;
 
     $view->todoForm->errors = null;
 
@@ -66,9 +66,9 @@ class Todos_Controller extends Controller {
         }
       } else {
         // repopulate the form fields
+        $view->todoForm->id           = $this->input->post('id');
         $view->todoForm->description  = $this->input->post('description');
         $view->todoForm->due_date     = $this->input->post('due_date');
-        $view->todoForm->id           = $this->input->post('id');
 
         // populate the error fields, if any
         $view->todoForm->errors = arr::overwrite($errors, $post->errors('form_errors'));

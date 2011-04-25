@@ -160,21 +160,26 @@ class Users_Controller extends Controller {
           $post->add_error('register_username', 'already_taken');
 
         } else {
-          $user = ORM::factory('user');
 
           $username = $this->input->post('register_username');
           $email    = $this->input->post('register_email');
           $password = $this->input->post('register_password');
 
+          $user = ORM::factory('user');
           $user->username = $username;
           $user->email    = $email;
-          $user->password = $this->auth->hash_password($password);
+          $user->password = $password;
 
           if( $user->add(ORM::factory('role', 'login')) AND $user->save() ) {
 
-            $this->auth->login($username, $password);
-            $this->session->set_flash(array('message_type'=>'good', 'message'=>'Welcome! Thanks for signing up :)'));
-            url::redirect($this->session->get('requested_url'));
+            if($this->auth->login($username, $password)) {
+              $this->session->set_flash(array('message_type'=>'good', 'message'=>'Welcome! Thanks for signing up :)'));
+              url::redirect($this->session->get('requested_url'));
+            } else {
+              $this->session->set_flash(array('message_type'=>'error', 'message'=>'Can\'t log you in. Sorry :('));
+              url::redirect('/users/login');
+            }
+
 
           } else {
 
