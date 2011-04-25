@@ -20,7 +20,9 @@ class Users_Controller extends Controller {
     $view->footer     = new View('layout/footer');
     $view->loginForm  = new View('users/elements/loginform');
 
-    $view->header->pageTitle = "Login";
+    $view->header->pageTitle  = "Login";
+    $view->header->isLoggedin = false;
+
     $view->message = $this->session->get('message') ? $this->session->get_once('message') : false;
 
     $view->loginForm->errors = null;
@@ -99,14 +101,92 @@ class Users_Controller extends Controller {
       url::redirect('/');
     }
 
+    $this->auth->logout();
+    url::redirect('/users/login');
+
   }
 
   public function my_profile() {
     // If the user is not logged in, redirect them to the login page
-    if( $this->auth->logged_in() ) {
+    if( !$this->auth->logged_in() ) {
       url::redirect('/users/login');
     }
 
+    $view                 = new View('users/my_profile');
+
+    $view->header         = new View('layout/header');
+    $view->footer         = new View('layout/footer');
+    $view->profileForm    = new View('users/elements/registerform');
+
+    $loggedInUser = $this->auth->get_user();
+
+    $view->header->pageTitle  = "My Profile";
+    $view->header->isLoggedin = true;
+    $view->header->username   = $loggedInUser->username;;
+
+    $view->message = $this->session->get('message') ? $this->session->get_once('message') : false;
+
+    $view->profileForm->action            = 'my_profile';
+    $view->profileForm->errors            = null;
+    $view->profileForm->register_username = $loggedInUser->username;
+    $view->profileForm->register_email    = $loggedInUser->email;
+
+    // setup and initialize your form field names
+    $form = array(
+      'register_username' => '',
+      'register_email'    => '',
+    );
+
+    //  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
+    $errors = $form;
+
+    if( $_POST ) {
+      // First, validate the login form
+      $post = new Validation($_POST);
+
+      $post->pre_filter('trim', TRUE);
+      $post->add_rules('register_username', 'required');
+      $post->add_rules('register_email', 'required', 'email');
+
+      if( $post->validate() ) {
+
+        $username = $this->input->post('register_username');
+        $email    = $this->input->post('register_email');
+
+        $user->username = $username;
+        $user->email    = $email;
+        $user->save();
+
+        if( $user->saved ) {
+
+          $view->message_type = "good";
+          $view->message      = "Profile saved.";
+
+        } else {
+
+          $view->profileForm->register_username = $username;
+          $view->profileForm->register_email    = $email ;
+
+          $view->message_type = "error";
+          $view->message      = "Hmmm, something went wrong and we couldn't register you. Please try again.";
+
+        }
+
+      } else {
+        // repopulate the form fields
+        $view->profileForm->register_username = $this->input->post('register_username');
+        $view->profileForm->register_email    = $this->input->post('register_rememberme');
+
+        // populate the error fields, if any
+        $view->profileForm->errors = arr::overwrite($errors, $post->errors('form_errors'));
+        $view->message_type         = "error";
+        $view->message              = "Please correct the errors below and try again.";
+      }
+
+      $view->profileForm->errors = arr::overwrite($errors, $post->errors('form_errors'));
+    }
+
+    $view->render(TRUE);
   }
 
   public function register() {
@@ -121,15 +201,20 @@ class Users_Controller extends Controller {
     $view->footer         = new View('layout/footer');
     $view->registerform   = new View('users/elements/registerform');
 
-    $view->header->pageTitle = "Register";
+    $view->header->pageTitle  = "Register";
+    $view->header->isLoggedin = false;
+
     $view->message = $this->session->get('message') ? $this->session->get_once('message') : false;
 
+    $view->registerform->action = 'register';
     $view->registerform->errors = null;
 
     // setup and initialize your form field names
     $form = array(
-      'register_username'   => '',
-      'register_email'      => '',
+      'register_username' => '',
+      'register_email'    => '',
+      'register_password' => '',
+      'register_confirm'  => '',
     );
 
     //  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
@@ -195,7 +280,7 @@ class Users_Controller extends Controller {
       } else {
         // repopulate the form fields
         $view->registerform->register_username    = $this->input->post('register_username');
-        $view->registerform->register_rememberme  = $this->input->post('rregister_ememberme');
+        $view->registerform->register_rememberme  = $this->input->post('register_rememberme');
 
         // populate the error fields, if any
         $view->registerform->errors = arr::overwrite($errors, $post->errors('form_errors'));

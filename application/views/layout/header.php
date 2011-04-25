@@ -26,5 +26,17 @@
   <div id="container">
     <header role="banner">
       <h1>Toodle</h1>
+
+      <?php if ($isLoggedin): ?>
+      <p>Oh hai, <?php echo $username; ?></p>
+
+      <nav>
+        <ul>
+          <li><a href="/">My ToDos</a></li>
+          <li><a href="/users/my_profile">My profile</a></li>
+          <li><a href="/users/logout">Logout</a></li>
+        </ul>
+      </nav>
+      <?php endif; ?>
     </header>
     <div id="main-content" role="main">

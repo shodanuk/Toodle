@@ -24,7 +24,9 @@ class Todos_Controller extends Controller {
     $view->todoForm = new View('todos/elements/form');
     $view->todoList = new View('todos/elements/list');
 
-    $view->header->pageTitle = "Your ToDos";
+    $view->header->pageTitle  = "Your ToDos";
+    $view->header->isLoggedin = true;
+    $view->header->username   = $this->user->username;
 
     $view->message_type  = $this->session->get('message_type') ? $this->session->get_once('message_type') : false;
     $view->message       = $this->session->get('message') ? $this->session->get_once('message') : false;
