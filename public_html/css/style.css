@@ -130,11 +130,11 @@ input:invalid, textarea:invalid {
 /* These selection declarations have to be separate
    No text-shadow: twitter.com/miketaylr/status/12228805301
    Also: hot pink! */
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
+::-moz-selection{ background: #666; color:#fff; text-shadow: none; }
+::selection { background:#666; color:#fff; text-shadow: none; }
 
 /* j.mp/webkit-tap-highlight-color */
-a:link { -webkit-tap-highlight-color: #FF5E99; }
+a:link { -webkit-tap-highlight-color: #666; }
 
 /* Make buttons play nice in IE:
    www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
@@ -150,16 +150,17 @@ button {  width: auto; overflow: visible; }
 
 body, select, input, textarea {
   /* #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */
-  color: #444;
+  color: #fff;
   /* Set your base font here, to apply evenly */
-  /* font-family: Georgia, serif;  */
+  font-size: 14px;
+  font-family: Helvetica, Arial, 'sans-serif';
 }
 
 /* Headers (h1, h2, etc) have no default font-size or margin; define those yourself */
 h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 
-a, a:active, a:visited { color: #607890; }
-a:hover { color: #036; }
+a, a:active, a:visited { color: #fff; }
+a:hover { color: #ccc; }
 
 
 /**
@@ -168,23 +169,121 @@ a:hover { color: #036; }
  * Author: Terry Morgan
  */
 
+body {
+  background: #444;
+}
+
 #container {
   margin: 0 auto;
   width: 960px;
 }
 
+.todolist-wrapper {
+  border: 1px solid #242424;
+  overflow: hidden;
+
+     -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+          border-radius: 8px;
 
 
+  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+}
 
+table.todo-list {
+  width: 100%;
+}
 
+table.todo-list tbody,
+table.todo-list tbody a {
+  color: #444;
+}
 
+table.todo-list th {
+  background-color: #8C8C8C;
+  border-bottom: 1px solid #242424;
+  border-right: 1px solid #242424;
+  padding: 10px;
+  text-align: left;
+  text-shadow: 1px 1px 1px #444;
 
+  background-image:         linear-gradient( top,
+                                             #8C8C8C 0%,
+                                             #6D6D6D 50%,
+                                             #565656 51%,
+                                             #484848 100%);
+  background-image:    -moz-linear-gradient( center top,
+                                             #8C8C8C 0%,
+                                             #6D6D6D 50%,
+                                             #565656 51%,
+                                             #484848 100% );
+  background-image:     -ms-linear-gradient( top,
+                                             #8C8C8C 0%,
+                                             #6D6D6D 50%,
+                                             #565656 51%,
+                                             #484848 100% );
+  background-image:      -o-linear-gradient( top,
+                                             #8C8C8C 0%,
+                                             #6D6D6D 50%,
+                                             #565656 51%,
+                                             #484848 100% );
+  background-image:        -webkit-gradient( linear,
+                                             left top,
+                                             left bottom,
+                                             color-stop(0%, #8C8C8C),
+                                             color-stop(50%, #6D6D6D),
+                                             color-stop(51%, #565656),
+                                             color-stop(100%, #484848) );
+  background-image: -webkit-linear-gradient(  #8C8C8C 0%,
+                                              #6D6D6D 50%,
+                                              #565656 51%,
+                                              #484848 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#8C8C8C', EndColorStr='#484848');
+}
 
+table.todo-list th:last-child {
+  border-right: none;
+}
 
+table.todo-list td {
+  background: #f3f3f3;
+  border-bottom: 1px solid #bfbfbf;
+  border-right: 1px solid #a8a8a8;
+  border-top: 1px solid #fcfcfc;
+  padding: 10px;
+}
 
+table.todo-list td:last-child {
+  border-right: none;
+}
 
+table.todo-list td:first-child {
+  background: #e4e4e4;
+  border-right: 1px solid #707070;
+  text-align: center;
+}
 
+table.todo-list tr:last-child td {
+  border-bottom: none;
+}
 
+table.todo-list td:first-child a {
+  height: 18px;
+  margin: 0 auto;
+  width: 18px;
+}
+
+table.todo-list td:first-child a.Incomplete {
+  background: url(/img/sprite.png) no-repeat 0 0;
+}
+
+table.todo-list td:first-child a.Incomplete:hover {
+  background: url(/img/sprite.png) no-repeat 0 -100px;
+}
+
+table.todo-list td:first-child a.Complete {
+  background: url(/img/sprite.png) no-repeat 0 -50px;
+}
 
 /**
  * Non-semantic helper classes: please define your styles before this section.
