@@ -30,7 +30,7 @@ $lang = array(
 
   'register_username' => array (
     'required'        => 'Please enter a username.',
-    'already_exists'  => 'The username you have entered is taken. Please choose another.',
+    'already_taken'   => 'The username you have entered is taken. Please choose another.',
     'default'         => 'Invalid Input.',
   ),
   'register_email' => array (
