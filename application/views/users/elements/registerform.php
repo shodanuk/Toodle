@@ -29,7 +29,7 @@
         <a href="/users/change_password">Change you password</a>
       <?php endif; ?>
       <div class="buttons submit">
-        <input type="submit" name="submit" id="submit" value="<?php echo ($action=='register') ? 'Register' : 'Update' ?>" />
+        <button type="submit" name="submit" id="submit"><?php echo ($action=='register') ? 'Register' : 'Update' ?></button>
       </div>
     </fieldset>
   </form>

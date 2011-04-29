@@ -150,17 +150,17 @@ button {  width: auto; overflow: visible; }
 
 body, select, input, textarea {
   /* #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */
-  color: #fff;
+  color: #676767;
   /* Set your base font here, to apply evenly */
   font-size: 14px;
   font-family: Helvetica, Arial, 'sans-serif';
 }
 
 /* Headers (h1, h2, etc) have no default font-size or margin; define those yourself */
-h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+h1, h2, h3, h4, h5, h6 { font-weight: bold; margin-bottom: 25px;}
 
-a, a:active, a:visited { color: #fff; }
-a:hover { color: #ccc; }
+a, a:active, a:visited { color: #676767; }
+a:hover { color: #555; text-decoration: none; }
 
 
 /**
@@ -170,8 +170,28 @@ a:hover { color: #ccc; }
  */
 
 body {
-  background: #444;
+  background: #f9f9f9 url(/img/bg-tile.png);
 }
+
+/* @group Typography  */
+
+h1 {
+  font-family: 'Neucha', serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  word-spacing: 0em;
+}
+
+/* @end Typography */
+
+/* @group Layout  */
 
 #container {
   margin: 0 auto;
@@ -179,25 +199,37 @@ body {
 }
 
 header {
-  padding: 30px 0;
+  padding: 15px 0;
 }
 
-header[role=banner] h1 {
-  font-family: 'Special Elite', serif;
-  font-size: 95px;
-  font-style: normal;
-  font-weight: 700;
+/* @end Layout */
+
+/* @group Header  */
+
+header[role=banner] .logo {
+  display: block;
   float: left;
-  text-shadow: 1px 1px 1px #000;
-  text-decoration: none;
-  text-transform: lowercase;
-  letter-spacing: 0.127em;
-  word-spacing: 0.006em;
+  font-family: 'Miltonian', serif;
+  font-size: 90px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.16em;
   line-height: 1.2;
+  text-decoration: none;
+  text-shadow: 2px 2px 2px #aaa;
+  text-transform: none;
+  word-spacing: 0em;
+}
+
+.login header[role=banner] .logo {
+  clear: both;
+  float: none;
+  text-align: center;
 }
 
 header[role=banner] nav {
   float: right;
+  margin-bottom: 25px;
 }
 
 header[role=banner] p {
@@ -209,19 +241,241 @@ header[role=banner] nav li {
   margin-left: 10px
 }
 
-.todolist-wrapper {
-  border: 1px solid #242424;
-  overflow: hidden;
+/* @end Header */
+
+/* @group Form styles  */
+
+label {
+  display: block;
+  float: left;
+  line-height: 2;
+  width: 140px;
+}
+
+.text input {
+  border: 1px solid #818181;
+  font-size: 1.4em;
+  padding: 3px;
+
+     -moz-box-shadow: inset 0 1px 3px #ccc;
+  -webkit-box-shadow: inset 0 1px 3px #ccc;
+          box-shadow: inset 0 1px 3px #ccc;
 
      -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
           border-radius: 8px;
-
-
-  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 }
 
+.error {
+  color: #944747;
+}
+
+.input .error {
+  padding: 5px 0 5px 140px;
+}
+
+.text input:focus {
+  outline: none;
+
+     -moz-box-shadow: inset 0 1px 1px #ccc, 0 0 5px #9d9d9d;
+  -webkit-box-shadow: inset 0 1px 1px #ccc, 0 0 5px #9d9d9d;
+          box-shadow: inset 0 1px 1px #ccc, 0 0 5px #9d9d9d;
+}
+
+.error input {
+  border: 1px solid #ba5a5a;
+
+     -moz-box-shadow: inset 0 1px 1px #ccc, 0 0 5px #ba5a5a;
+  -webkit-box-shadow: inset 0 1px 1px #ccc, 0 0 5px #ba5a5a;
+          box-shadow: inset 0 1px 1px #ccc, 0 0 5px #ba5a5a;
+}
+
+.input {
+  margin-bottom: 10px;
+}
+
+.checkbox {
+  overflow: hidden;
+  position: relative;
+
+}
+
+.checkbox input {
+  left: 140px;
+  position: absolute;
+  top: 9px;
+}
+
+.buttons {
+  padding-left: 140px;
+}
+
+button[type=submit] {
+  border: 1px solid #080807;
+  color: #fff;
+  font-size: 1em;
+  padding: 4px 12px;
+  text-shadow: 1px -1px 1px #000;
+
+     -moz-box-shadow: inset 0 0 1px #fff;
+  -webkit-box-shadow: inset 0 0 1px #fff;
+          box-shadow: inset 0 0 1px #fff;
+
+     -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+          border-radius: 7px;
+
+  background-image:         linear-gradient( top,
+                                             #959594 0%,
+                                             #6e6e6e 50%,
+                                             #565656 51%,
+                                             #414141 100%);
+  background-image:    -moz-linear-gradient( center top,
+                                             #959594 0%,
+                                             #6e6e6e 50%,
+                                             #565656 51%,
+                                             #414141 100% );
+  background-image:     -ms-linear-gradient( top,
+                                             #959594 0%,
+                                             #6e6e6e 50%,
+                                             #565656 51%,
+                                             #414141 100% );
+  background-image:      -o-linear-gradient( top,
+                                             #959594 0%,
+                                             #6e6e6e 50%,
+                                             #565656 51%,
+                                             #414141 100% );
+  background-image:        -webkit-gradient( linear,
+                                             left top,
+                                             left bottom,
+                                             color-stop(0%, #959594),
+                                             color-stop(50%, #6e6e6e),
+                                             color-stop(51%, #565656),
+                                             color-stop(100%, #414141) );
+  background-image: -webkit-linear-gradient(  #959594 0%,
+                                              #6e6e6e 50%,
+                                              #565656 51%,
+                                              #414141 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#959594', EndColorStr='#414141');
+}
+
+button[type=submit]:hover {
+  background-image:         linear-gradient( top,
+                                             #adadad 0%,
+                                             #747373 50%,
+                                             #4d4d4d 51%,
+                                             #292929 100%);
+  background-image:    -moz-linear-gradient( center top,
+                                             #adadad 0%,
+                                             #747373 50%,
+                                             #4d4d4d 51%,
+                                             #292929 100% );
+  background-image:     -ms-linear-gradient( top,
+                                             #adadad 0%,
+                                             #747373 50%,
+                                             #4d4d4d 51%,
+                                             #292929 100% );
+  background-image:      -o-linear-gradient( top,
+                                             #adadad 0%,
+                                             #747373 50%,
+                                             #4d4d4d 51%,
+                                             #292929 100% );
+  background-image:        -webkit-gradient( linear,
+                                             left top,
+                                             left bottom,
+                                             color-stop(0%, #adadad),
+                                             color-stop(50%, #747373),
+                                             color-stop(51%, #4d4d4d),
+                                             color-stop(100%, #292929) );
+  background-image: -webkit-linear-gradient(  #adadad 0%,
+                                              #747373 50%,
+                                              #4d4d4d 51%,
+                                              #292929 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#8C8C8C', EndColorStr='#292929');
+}
+
+/* @end Form styles */
+
+/* @group Login / register form  */
+
+.form-container {
+  background-color: #fcfcfb;
+  border: 1px solid #8f8f8f;
+  margin: 0 auto;
+  padding: 20px;
+  width: 400px;
+}
+
+#login-form form,
+#register-form form {
+  margin-bottom: 25px;
+}
+
+#login-form h2,
+#register-form h2 {
+  margin-bottom: 0;
+}
+
+#login-form h2,
+#register-form h2 {
+  margin-bottom: 0;
+}
+
+#login-form .message,
+#register-form .message {
+  margin-bottom: 15px;
+}
+
+/* @end Login form */
+
+/* @group todo form  */
+
+#todo-form {
+  margin-bottom: 25px;
+  padding: 2%;
+  width: 96%;
+}
+
+#todo-form .input {
+  float: left;
+}
+
+#todo-form input {
+  height: 23px;
+  width: 855px;
+
+         -moz-border-radius-topright: 0;
+      -moz-border-radius-bottomright: 0;
+
+     -webkit-border-top-right-radius: 0; /* -webkit extension now redundant, kept for backwards compatibility */
+  -webkit-border-bottom-right-radius: 0;
+
+             border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+}
+
+#todo-form button {
+  height: 31px;
+
+          -moz-border-radius-topleft: 0;
+       -moz-border-radius-bottomleft: 0;
+
+      -webkit-border-top-left-radius: 0; /* -webkit extension now redundant, kept for backwards compatibility */
+   -webkit-border-bottom-left-radius: 0;
+
+              border-top-left-radius: 0;
+           border-bottom-left-radius: 0;
+
+}
+
+/* @end todo form */
+
+
 /* @group todo list  */
+
+.todolist-wrapper {
+  border: 1px solid #242424;
+}
 
 table.todo-list {
   width: 100%;
@@ -236,42 +490,43 @@ table.todo-list th {
   background-color: #8C8C8C;
   border-bottom: 1px solid #242424;
   border-right: 1px solid #242424;
+  color: #fff;
   padding: 10px;
   text-align: left;
   text-shadow: 1px 1px 1px #444;
 
   background-image:         linear-gradient( top,
-                                             #8C8C8C 0%,
-                                             #6D6D6D 50%,
+                                             #959594 0%,
+                                             #6e6e6e 50%,
                                              #565656 51%,
-                                             #484848 100%);
+                                             #414141 100%);
   background-image:    -moz-linear-gradient( center top,
-                                             #8C8C8C 0%,
-                                             #6D6D6D 50%,
+                                             #959594 0%,
+                                             #6e6e6e 50%,
                                              #565656 51%,
-                                             #484848 100% );
+                                             #414141 100% );
   background-image:     -ms-linear-gradient( top,
-                                             #8C8C8C 0%,
-                                             #6D6D6D 50%,
+                                             #959594 0%,
+                                             #6e6e6e 50%,
                                              #565656 51%,
-                                             #484848 100% );
+                                             #414141 100% );
   background-image:      -o-linear-gradient( top,
-                                             #8C8C8C 0%,
-                                             #6D6D6D 50%,
+                                             #959594 0%,
+                                             #6e6e6e 50%,
                                              #565656 51%,
-                                             #484848 100% );
+                                             #414141 100% );
   background-image:        -webkit-gradient( linear,
                                              left top,
                                              left bottom,
-                                             color-stop(0%, #8C8C8C),
-                                             color-stop(50%, #6D6D6D),
+                                             color-stop(0%, #959594),
+                                             color-stop(50%, #6e6e6e),
                                              color-stop(51%, #565656),
-                                             color-stop(100%, #484848) );
-  background-image: -webkit-linear-gradient(  #8C8C8C 0%,
-                                              #6D6D6D 50%,
+                                             color-stop(100%, #414141) );
+  background-image: -webkit-linear-gradient(  #959594 0%,
+                                              #6e6e6e 50%,
                                               #565656 51%,
-                                              #484848 100% );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#8C8C8C', EndColorStr='#484848');
+                                              #414141 100% );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#959594', EndColorStr='#414141');
 }
 
 table.todo-list th:last-child {
@@ -318,25 +573,17 @@ table.todo-list td:first-child a:hover {
   background: url(/img/sprite.png) no-repeat 0 -100px;
 }
 
+table.todo-list tr.Complete td {
+  opacity: 0.3;
+}
+
 /* @end todo list */
-
-/* @group Todo form  */
-
-#todo-form {
-  padding: 30px 0;
-}
-
-#todo-form form {
-  width: 100%;
-}
-
-/* @end Todo form */
-
 
 /* @group Footer  */
 
 footer[role=contentinfo] {
   padding: 30px 0;
+  text-align: center;
 }
 
 /* @end Footer */

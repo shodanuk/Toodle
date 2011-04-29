@@ -15,7 +15,8 @@
   <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link  href="http://fonts.googleapis.com/css?family=Special+Elite:regular" rel="stylesheet" type="text/css" >
+  <link  href="http://fonts.googleapis.com/css?family=Miltonian:regular" rel="stylesheet" type="text/css" >
+  <link  href="http://fonts.googleapis.com/css?family=Neucha:regular" rel="stylesheet" type="text/css" >
 
   <link rel="stylesheet" href="/css/style.css?v=2">
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
@@ -26,7 +27,7 @@
 <body>
   <div id="container">
     <header role="banner" class="clearfix">
-      <h1>Toodle</h1>
+
 
       <?php if ($isLoggedin): ?>
 
@@ -41,5 +42,7 @@
       <p>Oh hai, <?php echo $username; ?></p>
 
       <?php endif; ?>
+
+      <span class="logo">Toodle</span>
     </header>
     <div id="main-content" role="main">

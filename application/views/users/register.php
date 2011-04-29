@@ -2,12 +2,15 @@
 
 <?php echo $header; ?>
 
-<h1>Register</h1>
+<section id="register-form" class="form-container">
+  <h1>Sign up for an account</h1>
 
-<?php if( $message ): ?>
-  <div class="message"><?php echo $message; ?></div>
-<?php endif; ?>
+  <?php if( $message ): ?>
+    <div class="message <?php echo $message_type; ?>"><?php echo $message; ?></div>
+  <?php endif; ?>
 
-<?php echo $registerform; ?>
+  <?php echo $registerform; ?>
 
+  <h2>Already have an account? Please <a href="/users/login">log in here</a></h2>
+</section>
 <?php echo $footer; ?>

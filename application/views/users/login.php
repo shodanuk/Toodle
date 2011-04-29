@@ -2,16 +2,17 @@
 
 <?php echo $header; ?>
 
-<h1>Login</h1>
+<section id="login-form" class="form-container">
+  <h1>Already signed up? Log in here:</h1>
 
-<?php if( $message ): ?>
-  <div class="message"><?php echo $message; ?></div>
-<?php endif; ?>
+  <?php if( $message ): ?>
+    <div class="message <?php echo $message_type; ?>"><?php echo $message; ?></div>
+  <?php endif; ?>
 
-<h2>Already signed up? Log in here:</h2>
 
-<?php echo $loginForm ?>
+  <?php echo $loginForm ?>
 
-<h2>No account? No problem, just <a href="/users/register">sign up here</a></h2>
+  <h2>No account? No problem, just <a href="/users/register">sign up here</a></h2>
+</section>
 
 <?php echo $footer; ?>
