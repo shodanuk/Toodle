@@ -5,8 +5,9 @@ $lang = array(
   // Add / edit todo item form errors
 
   'description' => array (
-    'required' => 'Please enter a description.',
-    'default'  => 'Invalid Input.',
+    'required'          => 'Please enter a description.',
+    'default'           => 'Invalid Input.',
+    'invalid_due_date'  => 'Please enter a due date in dd/mm/yy or dd/mm/yyyy format',
   ),
   'due_date' => array (
     'required' => 'Please enter a due date.',
