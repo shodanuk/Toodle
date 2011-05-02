@@ -254,7 +254,7 @@ label {
 
 .text input {
   border: 1px solid #818181;
-  font-size: 1.4em;
+  font-size: 1.2em;
   padding: 3px;
 
      -moz-box-shadow: inset 0 1px 3px #ccc;
@@ -404,6 +404,10 @@ button[type=submit]:hover {
   margin: 0 auto;
   padding: 20px;
   width: 400px;
+
+     -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+          border-radius: 8px;
 }
 
 #login-form form,
@@ -454,6 +458,12 @@ button[type=submit]:hover {
           border-bottom-right-radius: 0;
 }
 
+#todo-form .buttons {
+  float: left;
+  padding: 0;
+  width: 58px;
+}
+
 #todo-form button {
   height: 31px;
 
@@ -469,7 +479,6 @@ button[type=submit]:hover {
 }
 
 /* @end todo form */
-
 
 /* @group todo list  */
 
@@ -541,24 +550,35 @@ table.todo-list td {
   padding: 10px;
 }
 
-table.todo-list td:last-child {
-  border-right: none;
-}
-
 table.todo-list td:first-child {
   background: #e4e4e4;
   border-right: 1px solid #707070;
   text-align: center;
-}
-
-table.todo-list tr:last-child td {
-  border-bottom: none;
+  width: 45px;
 }
 
 table.todo-list td:first-child a {
   height: 18px;
   margin: 0 auto;
   width: 18px;
+}
+
+table.todo-list td:nth-child(2) {
+  width: 150px;
+}
+
+table.todo-list td:last-child {
+  border-right: none;
+  width: 70px;
+}
+
+
+table.todo-list tr:nth-child(2n+1) td {
+  background: #f9f9f9;
+}
+
+table.todo-list tr:last-child td {
+  border-bottom: none;
 }
 
 table.todo-list td:first-child a.Incomplete {
@@ -578,6 +598,26 @@ table.todo-list tr.Complete td {
 }
 
 /* @end todo list */
+
+/* @group Feedback messages  */
+
+.message {
+  border: 1px solid;
+  margin-bottom: 15px;
+  padding: 2% 2% 2% 10%;
+  width: 88%;
+
+     -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+          border-radius: 8px;
+}
+
+.message.good {
+
+}
+
+/* @end Feedback messages */
+
 
 /* @group Footer  */
 
