@@ -13,12 +13,12 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach($todos as $todo): ?>
+          <?php foreach ($todos as $todo): ?>
           <?php $status = $todo->complete ? 'Complete' : 'Incomplete'; ?>
 
           <tr class="<?php echo $status; ?>">
             <td><a href='/todos/complete/<?php echo $todo->id ?>' class="ir <?php echo $status; ?>"><?php echo $status; ?></a></td>
-            <td><?php echo $todo->due_date; ?></td>
+            <td><?php echo todo::display_due_date($todo->due_date); ?></td>
             <td><?php echo $todo->description; ?></td>
             <td>
               <a href="/todos/index/<?php echo $todo->id; ?>">Edit</a>
