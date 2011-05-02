@@ -1,5 +1,11 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-
+/**
+ * Todos API controller
+ *
+ * @package     Toodle
+ * @author      Terry Morgan <terry.morgan@marmaladeontoast.co.uk>
+ * @copyright   (c) 2011 Terry Morgan
+ */
 class Todos_API_Controller extends Controller {
 
   public function index() {

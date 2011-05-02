@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title><?php echo $pageTitle ?> | Toodle</title>
+  <title><?php echo $page_title ?> | Toodle</title>
   <meta name="description" content="">
   <meta name="author" content="Terry Morgan <terry.morgan@marmaladeontoast.co.uk>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +24,12 @@
 
   <script src="/js/libs/modernizr-1.7.min.js"></script>
 </head>
-<body>
+<body class="<?php echo $body_class; ?>">
   <div id="container">
     <header role="banner" class="clearfix">
 
 
-      <?php if ($isLoggedin): ?>
+      <?php if ($is_logged_in): ?>
 
       <nav class="clearfix">
         <ul>

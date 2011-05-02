@@ -10,7 +10,7 @@
   <?php endif; ?>
 
 
-  <?php echo $loginForm ?>
+  <?php echo $login_form ?>
 
   <h2>No account? No problem, just <a href="/users/register">sign up here</a></h2>
 </section>

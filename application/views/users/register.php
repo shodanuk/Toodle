@@ -9,7 +9,7 @@
     <div class="message <?php echo $message_type; ?>"><?php echo $message; ?></div>
   <?php endif; ?>
 
-  <?php echo $registerform; ?>
+  <?php echo $register_form; ?>
 
   <h2>Already have an account? Please <a href="/users/login">log in here</a></h2>
 </section>

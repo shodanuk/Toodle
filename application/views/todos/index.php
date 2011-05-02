@@ -6,8 +6,8 @@
   <div class="message <?php echo $message_type; ?>"><?php echo $message; ?></div>
 <?php endif; ?>
 
-<?php echo $todoForm ?>
+<?php echo $todo_form ?>
 
-<?php echo $todoList ?>
+<?php echo $todo_list ?>
 
 <?php echo $footer; ?>

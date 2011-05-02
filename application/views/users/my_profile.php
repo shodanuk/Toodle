@@ -8,6 +8,6 @@
   <div class="message"><?php echo $message; ?></div>
 <?php endif; ?>
 
-<?php echo $profileForm ?>
+<?php echo $profile_form ?>
 
 <?php echo $footer; ?>
